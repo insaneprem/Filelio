@@ -93,12 +93,10 @@ export default function SignUpForm() {
         // Improved error logging and user feedback
         console.error("Verification incomplete:", JSON.stringify(result, null, 2));
         let message = "Verification could not be completed. Please try again.";
-        if (result.status === "expired") {
-          message = "The verification code has expired. Please request a new one.";
-        } else if (result.status === "failed") {
-          message = "The verification code is incorrect. Please try again.";
-        } else if (result.status === "missing_requirements") {
+        if (result.status === "missing_requirements") {
           message = "Additional information is required to complete your account. Please contact support or try signing up again.";
+        } else if (result.status === "abandoned") {
+          message = "The verification process was abandoned. Please try again.";
         } else if (result.status) {
           message = `Verification failed with status: ${result.status}`;
         }
